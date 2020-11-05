@@ -32,16 +32,16 @@ Le fichier devrait ressembler à ceci:
     proto udp
     port 1194
     ca /etc/openvpn/easy-rsa/pki/ca.crt
-    cert /etc/openvpn/easy-rsa/pki/issued/raspberrypi_c3f71cfe-e38d-4a07-a7c8-822f0139cae3.crt
-    key /etc/openvpn/easy-rsa/pki/private/raspberrypi_c3f71cfe-e38d-4a07-a7c8-822f0139cae3.key
+    cert /etc/openvpn/easy-rsa/pki/issued/raspberrypi_XXX.crt
+    key /etc/openvpn/easy-rsa/pki/private/raspberrypi_XXX.key
     dh none
     topology subnet
     server 10.8.0.0 255.255.255.0
     route 192.168.10.0 255.255.255.0
     # Set your primary domain name server address for clients
-    push "dhcp-option DNS 8.8.8.8"
-    push "dhcp-option DNS 8.8.4.4"
-    push "route 192.168.0.0 255.255.255.0"
+    push "dhcp-option DNS X.X.X.X"
+    push "dhcp-option DNS X.X.X.X"
+    push "route 192.168.X.X 255.255.255.0"
     # Prevent DNS leaks on Windows
     push "block-outside-dns"
     # Override the Client default gateway by using 0.0.0.0/1 and
@@ -68,12 +68,12 @@ Le fichier devrait ressembler à ceci:
     ccd-exclusive
     #DuplicateCNs allow access control on a less-granular, per user basis.
     #Remove # if you will manage access by user instead of device.
-    #duplicate-cn
-    # Generated for use by PiVPN.io
+    #Duplicate-cn
+    #Generated for use by PiVPN.io
 
 Aller dans le fichier /etc/openvpn/ccd et créer un fichier avec le nom de l'utilisateur
     
-    sudo vi monclient
+    vi monclient
 
 Ajouter dans le fichier
 
@@ -86,9 +86,9 @@ Modifier les droits: Accordez les permissions aux dossier et fichiers précédem
 
 Redémarrez OpenVPN ou la machine au choix
     
-    sudo service openvpn restart
+    sudo systemctl restart openvpn.service
 
-== Gestion == 
+# Gestion
 Ajouter un utilisateur: 
 
     pivpn -a 
@@ -97,12 +97,12 @@ Retenir le nom d'utilisateur et ajouter un fichier de config dans
     
     cd /etc/openvpn/ccd
 
- :::  -a, add [nopass]     Create a client ovpn profile, optional nopass
- :::  -c, clients          List any connected clients to the server
- :::  -d, debug            Start a debugging session if having trouble
- :::  -l, list             List all valid and revoked certificates
- :::  -r, revoke           Revoke a client ovpn profile
- :::  -h, help             Show this help dialog
- :::  -u, uninstall        Uninstall PiVPN from your system!
- :::  -up, update          Updates PiVPN Scripts
- :::  -bk, backup          Backup Openvpn and ovpns dir
+    :::  -a, add [nopass]     Create a client ovpn profile, optional nopass
+    :::  -c, clients          List any connected clients to the server
+    :::  -d, debug            Start a debugging session if having trouble
+    :::  -l, list             List all valid and revoked certificates
+    :::  -r, revoke           Revoke a client ovpn profile
+    :::  -h, help             Show this help dialog
+    :::  -u, uninstall        Uninstall PiVPN from your system!
+    :::  -up, update          Updates PiVPN Scripts
+    :::  -bk, backup          Backup Openvpn and ovpns dir
